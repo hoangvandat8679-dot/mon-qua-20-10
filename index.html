@@ -1230,12 +1230,12 @@
           const AudioContextClass = window.AudioContext || window.webkitAudioContext;
           audioCtx = new AudioContextClass();
           analyser = audioCtx.createAnalyser();
-          analyser.fftSize = 128;
-          analyser.smoothingTimeConstant = 0.8;
+          analyser.fftSize = 256;
+          analyser.smoothingTimeConstant = 0.72; // Responsive, crisp beat tracking
           frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
           masterGain = audioCtx.createGain();
-          masterGain.gain.value = isMuted ? 0.0 : 0.85;
+          masterGain.gain.value = isMuted ? 0.0 : 0.9;
           masterGain.connect(analyser);
           analyser.connect(audioCtx.destination);
 
@@ -1632,7 +1632,7 @@
         });
       }
 
-      function render2DFX(audioEnergy) {
+      function render2DFX(audioEnergy, audioBass = 0.3) {
         const w = fxCanvas.width;
         const h = fxCanvas.height;
         fxCtx.clearRect(0, 0, w, h);
@@ -1641,33 +1641,42 @@
         const cy = h / 2 - 18;
         const baseRadius = Math.min(w, h) * 0.33;
 
-        // 1. Beat-Reactive Circular Spectrum Visualizer
-        const bars = 52;
+        // 1. Radiant Musical Spectrum Halo (Dancing with song frequencies)
+        const bars = 56;
         fxCtx.save();
         fxCtx.translate(cx, cy);
         for (let i = 0; i < bars; i++) {
           const angle = (i / bars) * Math.PI * 2;
           let val = 0;
-          if (analyser && frequencyData && isPlaying && !isMuted) {
-            val = frequencyData[i % (frequencyData.length / 2)] / 255;
-          } else if (isPlaying) {
-            val = 0.25 + 0.22 * Math.sin(currentTime * 4.5 + i * 0.35);
+          if (frequencyData && frequencyData.length > 0) {
+            val = frequencyData[i % 48] / 255;
           }
+          val = Math.max(val, audioBass * 0.65);
 
-          const barLen = 4 + val * 38;
-          const x1 = Math.cos(angle) * baseRadius;
-          const y1 = Math.sin(angle) * baseRadius;
+          const barLen = 5 + val * 48;
+          const x1 = Math.cos(angle) * (baseRadius - 2);
+          const y1 = Math.sin(angle) * (baseRadius - 2);
           const x2 = Math.cos(angle) * (baseRadius + barLen);
           const y2 = Math.sin(angle) * (baseRadius + barLen);
 
           fxCtx.strokeStyle = i % 2 === 0
-            ? `rgba(255, 209, 102, ${0.18 + val * 0.58})`
-            : `rgba(255, 77, 148, ${0.22 + val * 0.62})`;
-          fxCtx.lineWidth = 2.1;
+            ? `rgba(255, 209, 102, ${(0.25 + val * 0.65).toFixed(2)})`
+            : `rgba(255, 77, 148, ${(0.28 + val * 0.70).toFixed(2)})`;
+          fxCtx.lineWidth = 2.2 + val * 1.6;
           fxCtx.lineCap = 'round';
           fxCtx.beginPath();
           fxCtx.moveTo(x1, y1);
           fxCtx.lineTo(x2, y2);
+          fxCtx.stroke();
+        }
+
+        // Subtle Musical Heartbeat Core Ripple
+        if (audioBass > 0.45) {
+          const rippleR = baseRadius * (0.88 + (audioBass - 0.45) * 0.45);
+          fxCtx.strokeStyle = `rgba(255, 209, 102, ${((audioBass - 0.45) * 0.4).toFixed(2)})`;
+          fxCtx.lineWidth = 1.5;
+          fxCtx.beginPath();
+          fxCtx.arc(0, 0, rippleR, 0, Math.PI * 2);
           fxCtx.stroke();
         }
         fxCtx.restore();
@@ -1807,6 +1816,12 @@
       /* -------------------------------------------------------------------
        * 7. MAIN ANIMATION LOOP (60 FPS)
        * ------------------------------------------------------------------- */
+      // Multi-band Audio Analysis & Rhythm State
+      let audioBass = 0;
+      let audioMid = 0;
+      let audioTreble = 0;
+      let audioEnergy = 0;
+
       function animateLoop(now) {
         requestAnimationFrame(animateLoop);
 
@@ -1816,7 +1831,7 @@
         if (isPlaying) {
           currentTime += dt;
           if (holdCurrentScene) {
-            // Loop within the current 5-second scene window so the user can admire it
+            // Loop within current 5-second scene window
             const sceneStart = activeSceneIndex * 5.0;
             const sceneEnd = sceneStart + 4.95;
             if (currentTime >= sceneEnd) {
@@ -1829,47 +1844,126 @@
           updateSynthSequencer(currentTime);
         }
 
-        // Compute Audio Energy
-        let audioEnergy = 0.15;
+        // 1. EXTRACT REAL-TIME MULTI-BAND FREQUENCIES (Bass, Mid, Treble)
+        let rawB = 0, rawM = 0, rawT = 0;
+        let hasHardwareAudio = false;
+
         if (analyser && frequencyData && isPlaying && !isMuted) {
           analyser.getByteFrequencyData(frequencyData);
-          let sum = 0;
-          for (let i = 0; i < 24; i++) sum += frequencyData[i];
-          audioEnergy = sum / (24 * 255);
-        } else if (isPlaying) {
-          audioEnergy = 0.22 + 0.14 * Math.sin(now * 0.007);
+          let sumB = 0, sumM = 0, sumT = 0;
+          for (let i = 0; i < 8; i++) sumB += frequencyData[i];
+          for (let i = 8; i < 32; i++) sumM += frequencyData[i];
+          for (let i = 32; i < 70; i++) sumT += frequencyData[i];
+
+          rawB = sumB / (8 * 255);
+          rawM = sumM / (24 * 255);
+          rawT = sumT / (38 * 255);
+
+          if (rawB > 0.03 || rawM > 0.03 || rawT > 0.03) {
+            hasHardwareAudio = true;
+          }
         }
 
-        // Morph 3D Particle Positions toward Current Scene's Target Array
+        // Smart Organic Ballad Rhythm Generator (Seamless fallback if mobile WebAudio is gated)
+        if (!hasHardwareAudio && isPlaying) {
+          const bpmSec = 60 / 74; // ~74 BPM Romantic Ballad rhythm
+          const phase = (currentTime % bpmSec) / bpmSec;
+          const beatKick = Math.pow(Math.max(0, 1 - phase * 1.7), 2.2);
+          const melodySway = Math.sin(currentTime * 2.6);
+          const sparkle = Math.sin(currentTime * 5.8);
+
+          rawB = 0.26 + beatKick * 0.68;
+          rawM = 0.32 + melodySway * 0.38;
+          rawT = 0.28 + sparkle * 0.32;
+        }
+
+        // Smooth & Curve audio dimensions for musical feeling ("phiêu cùng nhạc")
+        audioBass = Math.min(1.0, Math.pow(rawB * 1.4, 1.25));
+        audioMid = Math.min(1.0, rawM * 1.3);
+        audioTreble = Math.min(1.0, rawT * 1.35);
+        audioEnergy = Math.min(1.0, (audioBass * 0.5 + audioMid * 0.3 + audioTreble * 0.2) * 1.2);
+
+        // 2. 3D PARTICLE CLOUD CHOREOGRAPHY (Scale bounce, wave ripples & breathing)
         const posAttr = particleGeo.attributes.position;
         const posArr = posAttr.array;
         const targetArr = sceneTargets[activeSceneIndex] || sceneTargets[0];
-        const beatPulse = 1 + audioEnergy * 0.26;
+
+        // Overall 3D System Beat Expansion
+        const systemBeatScale = 1.0 + audioBass * 0.18 + audioEnergy * 0.08;
+        particleSystem.scale.set(systemBeatScale, systemBeatScale, systemBeatScale);
 
         for (let i = 0; i < PARTICLE_COUNT; i++) {
           const i3 = i * 3;
-          let tx = targetArr[i3] * beatPulse;
-          let ty = targetArr[i3 + 1] * beatPulse;
+          let tx = targetArr[i3];
+          let ty = targetArr[i3 + 1];
           let tz = targetArr[i3 + 2];
 
-          // Scene 9 (Sky Lanterns): Add continuous gentle upward drift
+          // Harmonic Audio Wave: particles ripple & sway in 3D
+          const ripple = Math.sin(now * 0.0035 + i * 0.08) * (audioMid * 3.6);
+          const sparkleZ = Math.cos(now * 0.0028 + i * 0.05) * (audioTreble * 3.8);
+
+          ty += ripple;
+          tz += sparkleZ;
+
+          // Scene 9 (Sky Lanterns): Continuous floating upwards
           if (activeSceneIndex === 8) {
-            ty += Math.sin(now * 0.002 + i) * 1.5;
+            ty += Math.sin(now * 0.002 + i) * 1.8;
           }
 
-          posArr[i3] += (tx - posArr[i3]) * 0.065;
-          posArr[i3 + 1] += (ty - posArr[i3 + 1]) * 0.065;
-          posArr[i3 + 2] += (tz - posArr[i3 + 2]) * 0.065;
+          // Responsive lerp speed (faster spring on beat drops)
+          const lerpRate = 0.075 + audioBass * 0.035;
+          posArr[i3] += (tx - posArr[i3]) * lerpRate;
+          posArr[i3 + 1] += (ty - posArr[i3 + 1]) * lerpRate;
+          posArr[i3 + 2] += (tz - posArr[i3 + 2]) * lerpRate;
         }
         posAttr.needsUpdate = true;
 
-        // Dynamic 3D Camera & Rotation per Scene
+        // 3D Camera & Particle Size Audio-Reaction
         particleSystem.rotation.y = Math.sin(now * 0.00045) * 0.42 + pointerX * 0.35;
         particleSystem.rotation.x = Math.cos(now * 0.0003) * 0.18 + pointerY * 0.25;
-        particleMat.size = 1.25 + audioEnergy * 0.9;
+        particleMat.size = 1.35 + audioBass * 1.4 + audioTreble * 1.8;
+        camera3D.position.z = 210 - audioBass * 14; // Subtle heartbeat zoom punch
+
+        // 3. CENTER SVG ARTWORK CHOREOGRAPHY (Dancing & Fluttering with the Song)
+        const currentSceneEl = sceneElements[activeSceneIndex];
+        if (currentSceneEl) {
+          const svgWrap = currentSceneEl.querySelector('.relative');
+          if (svgWrap) {
+            const svgScale = 1.0 + audioBass * 0.08;
+            const svgSway = Math.sin(now * 0.002) * (1.2 + audioMid * 2.2);
+            svgWrap.style.transform = `scale(${svgScale.toFixed(3)}) rotate(${svgSway.toFixed(2)}deg)`;
+            svgWrap.style.filter = `drop-shadow(0 0 ${Math.round(14 + audioBass * 26)}px rgba(255, 42, 133, ${(0.45 + audioEnergy * 0.45).toFixed(2)}))`;
+          }
+
+          // Scene 4 (Hồ Điệp Ánh Sáng): Butterfly wings flutter in sync with music
+          if (activeSceneIndex === 3) {
+            const wingL = currentSceneEl.querySelector('.wing-left');
+            const wingR = currentSceneEl.querySelector('.wing-right');
+            if (wingL && wingR) {
+              const wingFlap = 0.72 + Math.sin(now * 0.015) * (0.28 + audioMid * 0.35);
+              wingL.style.transform = `scaleX(${wingFlap.toFixed(2)})`;
+              wingL.style.transformOrigin = '200px 200px';
+              wingR.style.transform = `scaleX(${wingFlap.toFixed(2)})`;
+              wingR.style.transformOrigin = '200px 200px';
+            }
+          }
+        }
+
+        // 4. BACKGROUND ATMOSPHERE UNIVERSE BREATHING
+        if (bgAtmosphere) {
+          bgAtmosphere.style.opacity = (0.84 + audioBass * 0.16).toFixed(2);
+        }
+
+        // 5. VINYL DISK LIVE EQUALIZER BARS
+        const diskWaves = document.querySelectorAll('#disk-icon-waves span');
+        if (diskWaves.length >= 3) {
+          diskWaves[0].style.height = `${Math.max(4, Math.round(audioBass * 16))}px`;
+          diskWaves[1].style.height = `${Math.max(4, Math.round(audioMid * 18))}px`;
+          diskWaves[2].style.height = `${Math.max(4, Math.round(audioTreble * 14))}px`;
+        }
 
         renderer3D.render(scene3D, camera3D);
-        render2DFX(audioEnergy);
+        render2DFX(audioEnergy, audioBass);
       }
 
       /* -------------------------------------------------------------------
