@@ -437,6 +437,52 @@
       50% { transform: scale(1.04); box-shadow: 0 0 45px rgba(255, 42, 133, 0.85), 0 0 25px rgba(255, 209, 102, 0.7); }
       100% { transform: scale(1); box-shadow: 0 0 25px rgba(255, 42, 133, 0.5), 0 0 10px rgba(255, 209, 102, 0.4); }
     }
+
+    /* Luxury Consolidated Caption Card (Impeccable Contrast Standard) */
+    .luxury-caption-card {
+      background: linear-gradient(180deg, rgba(22, 6, 32, 0.94) 0%, rgba(10, 2, 16, 0.98) 100%);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1.5px solid rgba(255, 209, 102, 0.45);
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.88),
+                  0 0 24px rgba(255, 42, 133, 0.22),
+                  inset 0 1px 1px rgba(255, 255, 255, 0.3);
+      transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .caption-headline {
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 2px #000;
+      letter-spacing: -0.01em;
+    }
+    .caption-message {
+      color: #fce7f3 !important;
+      -webkit-text-fill-color: #fce7f3 !important;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+    }
+    #caption-scene-tag {
+      color: #ffd166 !important;
+      -webkit-text-fill-color: #ffd166 !important;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(255, 209, 102, 0.4);
+    }
+
+    /* Finale Glass Shield Card */
+    .finale-shield-card {
+      background: linear-gradient(180deg, rgba(24, 6, 36, 0.92) 0%, rgba(12, 2, 20, 0.96) 100%);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1.5px solid rgba(255, 209, 102, 0.4);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+    }
+    .gift-seal-btn {
+      animation: pulseSeal 2s infinite;
+      box-shadow: 0 0 35px rgba(255, 42, 133, 0.6), 0 0 15px rgba(255, 209, 102, 0.5);
+    }
+    @keyframes pulseSeal {
+      0% { transform: scale(1); box-shadow: 0 0 25px rgba(255, 42, 133, 0.5), 0 0 10px rgba(255, 209, 102, 0.4); }
+      50% { transform: scale(1.04); box-shadow: 0 0 45px rgba(255, 42, 133, 0.85), 0 0 25px rgba(255, 209, 102, 0.7); }
+      100% { transform: scale(1); box-shadow: 0 0 25px rgba(255, 42, 133, 0.5), 0 0 10px rgba(255, 209, 102, 0.4); }
+    }
   </style>
 </head>
 <body class="relative select-none overflow-hidden w-screen h-[100dvh]">
@@ -588,12 +634,7 @@
             </text>
           </svg>
         </div>
-        <div class="mt-1 space-y-0.5">
-          <p class="text-[11px] uppercase tracking-[0.26em] text-amber-300 font-semibold">Cảnh 1 • Khởi Nguồn Ánh Sao</p>
-          <h1 class="text-2xl sm:text-4xl font-script text-shimmer-gold">
-            Gửi <span class="recipient-dynamic">Em Yêu</span> — Vì Sao Sáng Nhất
-          </h1>
-        </div>
+
       </section>
 
       <!-- ------------------------------------------------------------- -->
@@ -627,12 +668,7 @@
             </g>
           </svg>
         </div>
-        <div class="mt-1 space-y-0.5">
-          <p class="text-[11px] uppercase tracking-[0.26em] text-cyan-200 font-semibold">Cảnh 2 • Giọt Sương Ban Mai</p>
-          <h2 class="text-2xl sm:text-4xl font-script text-shimmer-gold">
-            Trong Trẻo Như Ánh Mắt Của <span class="recipient-dynamic">Em</span>
-          </h2>
-        </div>
+
       </section>
 
       <!-- ------------------------------------------------------------- -->
@@ -667,12 +703,7 @@
               fill="#ffd166" stroke="#ffffff" stroke-width="1.5" />
           </svg>
         </div>
-        <div class="mt-1 space-y-0.5">
-          <p class="text-[11px] uppercase tracking-[0.26em] text-pink-300 font-semibold">Cảnh 3 • Đóa Hồng Pha Lê Bung Nở</p>
-          <h2 class="text-2xl sm:text-4xl font-script text-shimmer-gold">
-            Rạng Rỡ & Kiêu Sa Vì <span class="recipient-dynamic">Em</span>
-          </h2>
-        </div>
+
       </section>
 
       <!-- ------------------------------------------------------------- -->
@@ -704,12 +735,7 @@
             <path d="M198 172 C188 145 170 138 162 145 M202 172 C212 145 230 138 238 145" fill="none" stroke="#ffd166" stroke-width="1.8" stroke-linecap="round" />
           </svg>
         </div>
-        <div class="mt-1 space-y-0.5">
-          <p class="text-[11px] uppercase tracking-[0.26em] text-fuchsia-300 font-semibold">Cảnh 4 • Vũ Điệu Hồ Điệp Ánh Sáng</p>
-          <h2 class="text-2xl sm:text-4xl font-script text-shimmer-gold">
-            Cánh Bướm Mơ Màng Bên Nụ Cười <span class="recipient-dynamic">Em</span>
-          </h2>
-        </div>
+
       </section>
 
       <!-- ------------------------------------------------------------- -->
@@ -744,12 +770,7 @@
             <text x="115" y="245" fill="#ff2a85" font-size="30" class="note-float-2">♥</text>
           </svg>
         </div>
-        <div class="mt-1 space-y-0.5">
-          <p class="text-[11px] uppercase tracking-[0.26em] text-amber-300 font-semibold">Cảnh 5 • Bản Giao Hưởng Tình Yêu</p>
-          <h2 class="text-2xl sm:text-4xl font-script text-shimmer-gold">
-            Giai Điệu Ngọt Ngào Viết Riêng Tặng <span class="recipient-dynamic">Em</span>
-          </h2>
-        </div>
+
       </section>
 
       <!-- ------------------------------------------------------------- -->
@@ -778,12 +799,7 @@
             <path d="M200 162 L204 184 L226 190 L204 196 L200 218 L196 196 L174 190 L196 184 Z" fill="#ffffff" />
           </svg>
         </div>
-        <div class="mt-1 space-y-0.5">
-          <p class="text-[11px] uppercase tracking-[0.26em] text-rose-400 font-semibold">Cảnh 6 • Sợi Chỉ Đỏ Định Mệnh</p>
-          <h2 class="text-2xl sm:text-4xl font-script text-shimmer-gold">
-            Vạn Dặm Nhân Gian, Định Mệnh Gắn Kết Đôi Ta
-          </h2>
-        </div>
+
       </section>
 
       <!-- ------------------------------------------------------------- -->
@@ -808,12 +824,7 @@
             <path d="M40 310 Q200 266 360 310" fill="none" stroke="url(#goldPinkGrad)" stroke-width="4" />
           </svg>
         </div>
-        <div class="mt-1 space-y-0.5">
-          <p class="text-[11px] uppercase tracking-[0.26em] text-indigo-300 font-semibold">Cảnh 7 • Hẹn Ước Dưới Trăng Sao</p>
-          <h2 class="text-2xl sm:text-4xl font-script text-shimmer-gold">
-            Nắm Tay <span class="recipient-dynamic">Em</span> Đi Qua Muôn Ngàn Mùa Hoa
-          </h2>
-        </div>
+
       </section>
 
       <!-- ------------------------------------------------------------- -->
@@ -846,12 +857,7 @@
             <path d="M285 135 L288 148 L301 151 L288 154 L285 167 L282 154 L269 151 L282 148 Z" fill="#ffd166" />
           </svg>
         </div>
-        <div class="mt-1 space-y-0.5">
-          <p class="text-[11px] uppercase tracking-[0.26em] text-cyan-200 font-semibold">Cảnh 8 • Kim Cương Vĩnh Cửu</p>
-          <h2 class="text-2xl sm:text-4xl font-script text-shimmer-gold">
-            <span class="recipient-dynamic">Em</span> Là Báu Vật Vô Giá Của Đời Anh
-          </h2>
-        </div>
+
       </section>
 
       <!-- ------------------------------------------------------------- -->
@@ -886,12 +892,7 @@
             </g>
           </svg>
         </div>
-        <div class="mt-1 space-y-0.5">
-          <p class="text-[11px] uppercase tracking-[0.26em] text-amber-300 font-semibold">Cảnh 9 • Đèn Trời Ước Nguyện</p>
-          <h2 class="text-2xl sm:text-4xl font-script text-shimmer-gold">
-            Ngàn Lời Chúc Bay Cao Cùng <span class="recipient-dynamic">Em</span>
-          </h2>
-        </div>
+
       </section>
 
       <!-- ------------------------------------------------------------- -->
@@ -916,23 +917,23 @@
             </div>
           </div>
 
-          <p class="text-[10px] uppercase tracking-[0.25em] text-amber-300 font-semibold">
-            Cảnh 10 • Thư Tình 20/10 Gửi <span class="recipient-dynamic">Em Yêu</span>
+          <p class="text-[10px] uppercase tracking-[0.25em] text-amber-300 font-bold drop-shadow">
+            ✨ CẢNH 10 • THƯ TÌNH 20/10 GỬI <span class="recipient-dynamic">EM YÊU</span> ✨
           </p>
 
-          <h3 class="font-script text-2xl sm:text-3xl text-pink-200 mt-0.5 mb-2">
-            Người Con Gái Tuyệt Vời Nhất
+          <h3 class="font-script text-2xl sm:text-3xl text-white mt-1 mb-2 font-bold drop-shadow-md">
+            Người Con Gái Anh Thương Nhất
           </h3>
 
           <div class="relative z-10 text-xs sm:text-sm leading-relaxed text-pink-50/95 font-normal px-1">
-            <p id="card-custom-message" class="italic text-amber-100/95 text-xs sm:text-sm leading-relaxed">
-              "Cảm ơn em đã đến bên anh, mang theo nụ cười ấm áp và dịu dàng làm rực sáng cả thế giới của anh. Chúc công chúa của anh ngày 20/10 luôn xinh đẹp, rạng rỡ, bình an và mãi hạnh phúc trong vòng tay anh!"
+            <p id="card-custom-message" class="text-[#fffdfa] text-xs sm:text-[13.5px] leading-relaxed drop-shadow">
+              "Chúc mừng ngày 20/10 người anh thương! Cảm ơn em đã bước vào cuộc sống của anh, mang theo sự ấm áp, nụ cười dịu dàng và cả những khoảnh khắc rất đỗi bình yên. Mong em mỗi ngày đều vui vẻ, luôn rạng ngời và hạnh phúc. Anh luôn ở đây bên em!"
             </p>
           </div>
 
-          <div class="mt-3 pt-2 border-t border-pink-300/20 flex items-center justify-between text-xs text-amber-200/90">
-            <span class="font-serif-luxury italic text-xs sm:text-sm">20 • 10 • Phụ Nữ Việt Nam</span>
-            <span class="font-script text-base sm:text-lg text-pink-300" id="card-sender-signature">Yêu Em Thật Nhiều ♥</span>
+          <div class="mt-3 pt-2.5 border-t border-amber-300/25 flex items-center justify-between text-xs text-amber-200">
+            <span class="font-serif-luxury italic text-xs sm:text-sm text-amber-300">20 • 10 • Phụ Nữ Việt Nam</span>
+            <span class="font-script text-base sm:text-lg text-pink-200 font-bold drop-shadow" id="card-sender-signature">Yêu Em Thật Nhiều ♥</span>
           </div>
         </div>
       </section>
@@ -962,12 +963,7 @@
             </text>
           </svg>
         </div>
-        <div class="mt-1 space-y-0.5">
-          <p class="text-[11px] uppercase tracking-[0.26em] text-amber-300 font-semibold">Cảnh 11 • Vương Miện Nữ Hoàng</p>
-          <h2 class="text-2xl sm:text-4xl font-script text-shimmer-gold">
-            Vương Miện Rực Rỡ Nhất Dành Tặng <span class="recipient-dynamic">Em</span>
-          </h2>
-        </div>
+
       </section>
 
       <!-- ------------------------------------------------------------- -->
@@ -988,43 +984,60 @@
           </svg>
         </div>
 
-        <h2 class="text-2xl sm:text-4xl font-bold text-shimmer-gold tracking-tight">
-          Chúc Mừng 20/10, <span class="recipient-dynamic">Em Yêu</span>!
-        </h2>
-        <p class="text-[11px] sm:text-xs text-pink-200/90 mt-1 max-w-xs mx-auto">
-          Chạm vào bất kỳ đâu hoặc chọn cảnh 1–12 bên dưới để thưởng thức lại ✨
-        </p>
+        <div class="mt-2 p-4 sm:p-5 rounded-2xl finale-shield-card max-w-sm mx-auto shadow-2xl">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight drop-shadow-md">
+            Chúc Mừng 20/10, <span class="recipient-dynamic text-amber-300">Em Yêu</span>!
+          </h2>
+          <p class="text-[11px] sm:text-xs text-pink-100/90 mt-1.5 max-w-xs mx-auto leading-relaxed">
+            Chạm vào màn hình để thắp sáng pháo hoa tim hoặc xem lại từ đầu ✨
+          </p>
 
-        <div class="mt-3 flex flex-wrap items-center justify-center gap-2">
-          <button id="btn-finale-firework" type="button"
-            class="px-3.5 py-2 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 text-white font-semibold text-xs shadow-lg shadow-pink-500/40 active:scale-95 transition flex items-center gap-1.5">
-            <span>🎆 Bắn Pháo Hoa Tim</span>
-          </button>
-          <button id="btn-finale-replay" type="button"
-            class="glass-panel px-3.5 py-2 rounded-full text-amber-200 hover:border-amber-300/60 font-medium text-xs active:scale-95 transition flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
-            <span>Xem Lại Trọn Vẹn 12 Cảnh</span>
-          </button>
+          <div class="mt-3.5 flex flex-wrap items-center justify-center gap-2">
+            <button id="btn-finale-firework" type="button"
+              class="px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 text-white font-semibold text-xs shadow-lg shadow-pink-500/40 active:scale-95 transition flex items-center gap-1.5">
+              <span>🎆 Bắn Pháo Hoa Tim</span>
+            </button>
+            <button id="btn-finale-replay" type="button"
+              class="glass-panel px-4 py-2 rounded-full text-amber-200 hover:border-amber-300/60 font-medium text-xs active:scale-95 transition flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              <span>Xem Lại Trọn Vẹn 12 Cảnh</span>
+            </button>
+          </div>
         </div>
       </section>
 
     </div>
 
     <!-- =============================================================== -->
-    <!-- LAYER 4: POETIC SUBTITLE PILL DOCK                              -->
+    <!-- LAYER 4: LUXURY TIME-SYNCED STORY CAPTION DOCK                  -->
     <!-- =============================================================== -->
     <footer class="w-full px-3 pb-3 sm:px-6 sm:pb-5 flex flex-col items-center gap-1.5 pointer-events-auto z-30 select-none">
-      <!-- Time-Synced Poetic Vietnamese Lyric / Subtitle Display -->
-      <div class="w-full max-w-xl text-center px-4 py-2.5 rounded-2xl bg-black/60 backdrop-blur-xl border border-pink-400/35 shadow-2xl">
-        <p id="synced-subtitle" class="text-xs sm:text-sm font-medium text-pink-100 tracking-wide transition-all duration-300 min-h-[1.5rem] flex items-center justify-center leading-relaxed">
-          ✨ Vũ trụ bừng sáng ngày 20/10, kết tụ ngàn ánh sao dành tặng Em... ✨
+      <!-- Dedicated High-Contrast Story Caption Card (Impeccable Standard) -->
+      <div id="story-caption-card" class="luxury-caption-card w-full max-w-md mx-auto px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl select-none">
+        <!-- Eyebrow Scene Pill -->
+        <div class="flex items-center justify-center gap-2 mb-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+          <span id="caption-scene-tag" class="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase text-amber-300">
+            CẢNH 1 • KHỞI NGUỒN ÁNH SAO
+          </span>
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+        </div>
+
+        <!-- Headline: Solid Pure White, Deep Contrast Drop Shadow -->
+        <h2 id="caption-scene-title" class="caption-headline text-sm sm:text-base font-bold text-white text-center leading-snug">
+          Vì Sao Sáng Nhất Dành Tặng Em Yêu
+        </h2>
+
+        <!-- Poetic Subtitle / Sincere Love Message (Humanized) -->
+        <p id="synced-subtitle" class="caption-message text-xs sm:text-[13px] font-normal text-pink-100/90 text-center mt-1 leading-relaxed italic">
+          Mỗi vì sao thắp sáng đêm nay là một lời nhắn nhủ yêu thương anh muốn gửi đến Em Yêu...
         </p>
       </div>
 
       <!-- Romantic Mobile Hint -->
-      <p class="text-[10px] text-pink-200/65 font-light flex items-center gap-1">
+      <p class="text-[10px] text-pink-200/60 font-light flex items-center gap-1">
         <span>✨ Chạm màn hình để thả tim • Vuốt trái / phải để đổi cảnh</span>
       </p>
     </footer>
@@ -1060,8 +1073,8 @@
         Món Quà Dành Tặng <span class="recipient-dynamic">Em Yêu</span>
       </h1>
       
-      <p class="text-xs sm:text-sm text-pink-100/85 mt-2.5 leading-relaxed font-normal">
-        Hôm nay là ngày của Em. Anh đã gói trọn tất cả dịu dàng, những vì sao lấp lánh và giai điệu ngọt ngào nhất vào trong 12 cảnh kỳ diệu này...
+      <p class="text-xs sm:text-sm text-pink-100/90 mt-2.5 leading-relaxed font-normal">
+        Hôm nay là ngày 20/10 của Em. Anh đã dành trọn sự dịu dàng và những điều ngọt ngào nhất vào trong 12 cảnh kỳ diệu này để gửi tặng người anh thương...
       </p>
 
       <!-- Romantic Opening Button -->
@@ -1114,75 +1127,87 @@
       const SCENES = [
         {
           id: 1, start: 0, end: 5,
-          title: 'Khởi Nguồn Ánh Sao 20/10',
+          title: 'Khởi Nguồn Ánh Sao',
+          headline: 'Vì Sao Sáng Nhất Dành Tặng {NAME}',
           bg: 'radial-gradient(circle at 50% 36%, #36094a 0%, #130321 58%, #05010a 100%)',
-          sub: '✨ Vũ trụ bừng sáng ngày 20/10, kết tụ ngàn ánh sao dành tặng {NAME}... ✨'
+          sub: 'Mỗi vì sao thắp sáng đêm nay là một lời nhắn nhủ yêu thương anh muốn gửi đến {NAME} ngày 20/10.'
         },
         {
           id: 2, start: 5, end: 10,
-          title: 'Giọt Sương Mai & Nụ Hồng',
+          title: 'Giọt Sương Ban Mai',
+          headline: 'Dịu Dàng Như Ánh Mắt {NAME}',
           bg: 'radial-gradient(circle at 50% 40%, #0d3b4c 0%, #09182b 58%, #04050c 100%)',
-          sub: '💧 Giọt sương mai tinh khiết chạm nhẹ, đánh thức nụ hồng dịu dàng như ánh mắt {NAME}.'
+          sub: 'Mong {NAME} mỗi sớm mai thức dậy đều thấy lòng nhẹ nhõm, an yên và ngập tràn niềm vui.'
         },
         {
           id: 3, start: 10, end: 15,
-          title: 'Đóa Hồng Pha Lê Bung Nở',
+          title: 'Đóa Hồng Pha Lê',
+          headline: 'Rạng Rỡ & Ngát Hương Bên {NAME}',
           bg: 'radial-gradient(circle at 50% 42%, #4f0d38 0%, #1f0422 58%, #07010c 100%)',
-          sub: '🌹 Từng cánh hoa hồng pha lê bung nở rực rỡ, ngát hương vì nụ cười của {NAME}.'
+          sub: 'Dù cuộc sống ngoài kia có bận rộn đến đâu, nụ cười của {NAME} vẫn luôn ngọt ngào như đóa hoa này.'
         },
         {
           id: 4, start: 15, end: 20,
-          title: 'Vũ Điệu Hồ Điệp Ánh Sáng',
+          title: 'Vũ Điệu Hồ Điệp',
+          headline: 'Cánh Bướm Mơ Màng Bên Nụ Cười Em',
           bg: 'radial-gradient(circle at 50% 38%, #3c096c 0%, #16042c 58%, #05010a 100%)',
-          sub: '🦋 Đôi cánh hồ điệp ánh sáng bay lượn giữa ngân hà, mang theo giấc mơ ngọt ngào bên {NAME}.'
+          sub: 'Mong em luôn tự do, rạng rỡ bay đến những ước mơ của mình, và phía sau luôn có anh đồng hành.'
         },
         {
           id: 5, start: 20, end: 25,
-          title: 'Bản Giao Hưởng Tình Yêu',
+          title: 'Giao Hưởng Tình Yêu',
+          headline: 'Giai Điệu Ngọt Ngào Dành Riêng {NAME}',
           bg: 'radial-gradient(circle at 50% 38%, #4a154b 0%, #1b0624 58%, #06010a 100%)',
-          sub: '🎶 Từng cung đàn ngân vang nhịp đập con tim, viết nên bản tình ca số 1 tặng {NAME}.'
+          sub: 'Khúc nhạc dịu êm này viết riêng cho {NAME}, như từng nhịp đập ấm áp mỗi khi ở cạnh em.'
         },
         {
           id: 6, start: 25, end: 30,
           title: 'Sợi Chỉ Đỏ Định Mệnh',
+          headline: 'Duyên Phận Diệu Kỳ Gắn Kết Đôi Ta',
           bg: 'radial-gradient(circle at 50% 40%, #590d22 0%, #220412 58%, #070106 100%)',
-          sub: '❤️ Giữa hàng tỷ người, sợi chỉ đỏ định mệnh đã dẫn lối để tay anh chạm lấy tay {NAME}.'
+          sub: 'Gặp được em giữa muôn triệu người là điều may mắn và tuyệt vời nhất cuộc đời anh.'
         },
         {
           id: 7, start: 30, end: 35,
-          title: 'Hẹn Ước Dưới Trăng Sao',
+          title: 'Hẹn Ước Dưới Trăng',
+          headline: 'Nắm Tay {NAME} Đi Qua Muôn Mùa Hoa',
           bg: 'radial-gradient(circle at 50% 35%, #1d114d 0%, #0f0529 58%, #04010a 100%)',
-          sub: '🌙 Dưới vầng trăng bạc và mưa sao băng, thế giới thu nhỏ lại vừa bằng hai chúng ta.'
+          sub: 'Dù bầu trời ngoài kia có rộng lớn thế nào, điều bình yên nhất với anh vẫn là có em kề bên.'
         },
         {
           id: 8, start: 35, end: 40,
           title: 'Kim Cương Vĩnh Cửu',
+          headline: '{NAME} Là Điều Vô Giá Của Cuộc Đời Anh',
           bg: 'radial-gradient(circle at 50% 38%, #12355b 0%, #0c1633 58%, #04050f 100%)',
-          sub: '💎 Lấp lánh và vĩnh cửu như kim cương, {NAME} là báu vật quý giá nhất trong đời anh.'
+          sub: 'Em luôn là người con gái đặc biệt, tỏa sáng theo cách riêng mà không cần so sánh với bất kỳ ai.'
         },
         {
           id: 9, start: 40, end: 45,
           title: 'Đèn Trời Ước Nguyện',
+          headline: 'Ngàn Lời Chúc Bình An Bay Cao',
           bg: 'radial-gradient(circle at 50% 42%, #52220e 0%, #240b15 58%, #070208 100%)',
-          sub: '🏮 Hàng ngàn ngọn đèn trời bay cao, gửi gắm ước nguyện cùng {NAME} hạnh phúc trăm năm.'
+          sub: 'Mỗi ngọn đèn thắp lên là một lời nguyện cầu, mong những điều tốt đẹp nhất sẽ luôn ở bên em.'
         },
         {
           id: 10, start: 45, end: 50,
-          title: 'Bức Thư Tình Pha Lê',
+          title: 'Thư Tình Pha Lê',
+          headline: 'Bức Thư Nhỏ Gửi Trọn Yêu Thương',
           bg: 'radial-gradient(circle at 50% 45%, #4d0b2b 0%, #200419 60%, #07010a 100%)',
-          sub: '💌 Mở bức thư pha lê chứa đựng trọn vẹn lời yêu thương từ sâu thẳm trái tim anh...'
+          sub: 'Tất cả chân thành từ sâu thẳm trái tim anh dành tặng riêng {NAME}...'
         },
         {
           id: 11, start: 50, end: 55,
           title: 'Vương Miện Nữ Hoàng',
+          headline: 'Người Con Gái Tuyệt Vời Nhất Của Anh',
           bg: 'radial-gradient(circle at 50% 38%, #4a1c40 0%, #1e0624 58%, #06010a 100%)',
-          sub: '👑 Trao chiếc vương miện lấp lánh nhất lên mái tóc {NAME} — Nữ Hoàng Trái Tim Anh!'
+          sub: 'Trong mắt anh, {NAME} luôn là người con gái tuyệt vời và xứng đáng với những gì trọn vẹn nhất.'
         },
         {
           id: 12, start: 55, end: 60.5,
-          title: 'Đại Tiệc Pháo Hoa Vĩnh Cửu',
+          title: 'Đại Tiệc Pháo Hoa',
+          headline: 'Chúc Mừng 20/10 — Mãi Mãi Yêu Em!',
           bg: 'radial-gradient(circle at 50% 38%, #5e0f38 0%, #260624 55%, #08010d 100%)',
-          sub: '🎆 Chúc Mừng 20/10 {NAME}! Tình yêu đôi ta mãi bất diệt như pháo hoa rực sáng bầu trời!'
+          sub: 'Chúc mừng ngày Phụ nữ Việt Nam của {NAME}! Cảm ơn em vì đã luôn đồng hành cùng anh.'
         }
       ];
 
@@ -1809,15 +1834,29 @@
           }
         }
 
-        // Update Subtitle for Current Scene
-        const rawSub = SCENES[activeSceneIndex].sub;
-        const formattedSub = rawSub.replace(/\{NAME\}/g, loverName);
+        // Update Luxury Caption Card for Current Scene
+        const sceneObj = SCENES[activeSceneIndex];
+        const formattedTag = `CẢNH ${sceneObj.id} • ${sceneObj.title.toUpperCase()}`;
+        const formattedTitle = (sceneObj.headline || sceneObj.title).replace(/\{NAME\}/g, loverName);
+        const formattedSub = sceneObj.sub.replace(/\{NAME\}/g, loverName);
+
         if (formattedSub !== activeSubtitleText) {
           activeSubtitleText = formattedSub;
-          syncedSubtitle.style.opacity = '0';
+          const captionCard = document.getElementById('story-caption-card');
+          if (captionCard) {
+            captionCard.style.opacity = '0.35';
+            captionCard.style.transform = 'translateY(4px)';
+          }
           setTimeout(() => {
-            syncedSubtitle.textContent = formattedSub;
-            syncedSubtitle.style.opacity = '1';
+            const tagEl = document.getElementById('caption-scene-tag');
+            const titleEl = document.getElementById('caption-scene-title');
+            if (tagEl) tagEl.textContent = formattedTag;
+            if (titleEl) titleEl.textContent = formattedTitle;
+            if (syncedSubtitle) syncedSubtitle.textContent = `"${formattedSub}"`;
+            if (captionCard) {
+              captionCard.style.opacity = '1';
+              captionCard.style.transform = 'translateY(0px)';
+            }
           }, 140);
         }
       }
