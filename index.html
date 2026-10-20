@@ -559,49 +559,20 @@
   <!-- =================================================================== -->
   <main id="stage-container" class="relative z-10 w-full h-full flex flex-col justify-between pointer-events-none stage-perspective">
 
-    <!-- TOP STORY HUD (12 Segmented Story Bars + Floating Audio Disk) -->
-    <header class="w-full px-3 pt-3 sm:px-6 sm:pt-4 flex flex-col gap-2 pointer-events-auto z-30 select-none">
-      <!-- 12-Story Segments Bar (Instagram / TikTok Stories Style) -->
-      <div id="story-progress" class="story-progress-container" aria-label="Tiến trình 12 cảnh">
-        <div class="story-bar"><div class="story-bar-fill" id="story-fill-0"></div></div>
-        <div class="story-bar"><div class="story-bar-fill" id="story-fill-1"></div></div>
-        <div class="story-bar"><div class="story-bar-fill" id="story-fill-2"></div></div>
-        <div class="story-bar"><div class="story-bar-fill" id="story-fill-3"></div></div>
-        <div class="story-bar"><div class="story-bar-fill" id="story-fill-4"></div></div>
-        <div class="story-bar"><div class="story-bar-fill" id="story-fill-5"></div></div>
-        <div class="story-bar"><div class="story-bar-fill" id="story-fill-6"></div></div>
-        <div class="story-bar"><div class="story-bar-fill" id="story-fill-7"></div></div>
-        <div class="story-bar"><div class="story-bar-fill" id="story-fill-8"></div></div>
-        <div class="story-bar"><div class="story-bar-fill" id="story-fill-9"></div></div>
-        <div class="story-bar"><div class="story-bar-fill" id="story-fill-10"></div></div>
-        <div class="story-bar"><div class="story-bar-fill" id="story-fill-11"></div></div>
-      </div>
-
-      <!-- Current Scene Title & Floating Romantic Audio Disk -->
-      <div class="flex items-center justify-between w-full mt-0.5">
-        <!-- Scene Badge -->
-        <div class="flex items-center gap-2 glass-panel px-3 py-1.5 rounded-full shadow-lg border border-pink-400/30">
-          <span id="hud-scene-badge" class="px-2 py-0.5 rounded-full bg-gradient-to-r from-pink-500 to-amber-400 text-[#180324] font-bold text-[10px] sm:text-xs">
-            Cảnh 1/12
-          </span>
-          <span id="hud-scene-name" class="text-amber-200 font-semibold text-xs truncate max-w-[170px] sm:max-w-xs">
-            Khởi Nguồn Ánh Sao 20/10
-          </span>
+    <!-- TOP BAR (Cinematic Minimalist with Floating Romantic Audio Toggle) -->
+    <header class="w-full px-4 pt-3.5 sm:px-6 sm:pt-4 flex items-center justify-end pointer-events-auto z-30 select-none">
+      <!-- Rotating Vinyl Disk Audio Indicator & Mute Button -->
+      <button id="btn-audio-toggle" type="button" class="audio-disk-btn audio-disk-spinning" title="Bật / Tắt âm nhạc">
+        <div id="disk-icon-waves" class="flex items-end justify-center gap-[2px] h-4">
+          <span class="w-[2px] h-3 bg-amber-300 rounded-full animate-pulse"></span>
+          <span class="w-[2px] h-4 bg-pink-400 rounded-full animate-bounce"></span>
+          <span class="w-[2px] h-2 bg-amber-200 rounded-full animate-pulse"></span>
         </div>
-
-        <!-- Rotating Vinyl Disk Audio Indicator & Mute Button -->
-        <button id="btn-audio-toggle" type="button" class="audio-disk-btn audio-disk-spinning" title="Bật / Tắt âm nhạc">
-          <div id="disk-icon-waves" class="flex items-end justify-center gap-[2px] h-4">
-            <span class="w-[2px] h-3 bg-amber-300 rounded-full animate-pulse"></span>
-            <span class="w-[2px] h-4 bg-pink-400 rounded-full animate-bounce"></span>
-            <span class="w-[2px] h-2 bg-amber-200 rounded-full animate-pulse"></span>
-          </div>
-          <svg id="disk-icon-muted" class="w-4 h-4 text-rose-300 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-          </svg>
-        </button>
-      </div>
+        <svg id="disk-icon-muted" class="w-4 h-4 text-rose-300 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+        </svg>
+      </button>
     </header>
 
     <!-- =============================================================== -->
@@ -918,7 +889,7 @@
           </div>
 
           <p class="text-[10px] uppercase tracking-[0.25em] text-amber-300 font-bold drop-shadow">
-            ✨ CẢNH 10 • THƯ TÌNH 20/10 GỬI <span class="recipient-dynamic">EM YÊU</span> ✨
+            ✨ THƯ TÌNH 20/10 GỬI <span class="recipient-dynamic">EM YÊU</span> ✨
           </p>
 
           <h3 class="font-script text-2xl sm:text-3xl text-white mt-1 mb-2 font-bold drop-shadow-md">
@@ -1016,14 +987,7 @@
     <footer class="w-full px-3 pb-3 sm:px-6 sm:pb-5 flex flex-col items-center gap-1.5 pointer-events-auto z-30 select-none">
       <!-- Dedicated High-Contrast Story Caption Card (Impeccable Standard) -->
       <div id="story-caption-card" class="luxury-caption-card w-full max-w-md mx-auto px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl select-none">
-        <!-- Eyebrow Scene Pill -->
-        <div class="flex items-center justify-center gap-2 mb-1">
-          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-          <span id="caption-scene-tag" class="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase text-amber-300">
-            CẢNH 1 • KHỞI NGUỒN ÁNH SAO
-          </span>
-          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-        </div>
+
 
         <!-- Headline: Solid Pure White, Deep Contrast Drop Shadow -->
         <h2 id="caption-scene-title" class="caption-headline text-sm sm:text-base font-bold text-white text-center leading-snug">
@@ -1215,8 +1179,6 @@
        * 2. DOM REFERENCES & PERSONALIZATION SYNC
        * ------------------------------------------------------------------- */
       const bgAtmosphere = document.getElementById('bg-atmosphere');
-      const hudSceneBadge = document.getElementById('hud-scene-badge');
-      const hudSceneName = document.getElementById('hud-scene-name');
       const syncedSubtitle = document.getElementById('synced-subtitle');
       const customAudioEl = document.getElementById('custom-audio');
       const btnAudioToggle = document.getElementById('btn-audio-toggle');
@@ -1785,20 +1747,6 @@
       }
 
       function syncStageToTime(timeSec) {
-        // Update 12 Story Progress Segments
-        for (let s = 0; s < 12; s++) {
-          const barFill = document.getElementById(`story-fill-${s}`);
-          if (!barFill) continue;
-          if (s < activeSceneIndex) {
-            barFill.style.width = '100%';
-          } else if (s === activeSceneIndex) {
-            const sceneProgress = Math.min(100, Math.max(0, ((timeSec - s * 5.0) / 5.0) * 100));
-            barFill.style.width = `${sceneProgress}%`;
-          } else {
-            barFill.style.width = '0%';
-          }
-        }
-
         // Determine Active Scene (0 to 11)
         const newSceneIdx = Math.min(11, Math.floor(timeSec / 5.0));
 
@@ -1815,8 +1763,6 @@
 
           const sceneObj = SCENES[activeSceneIndex];
           bgAtmosphere.style.background = sceneObj.bg;
-          hudSceneBadge.textContent = `Cảnh ${sceneObj.id}/12`;
-          hudSceneName.textContent = sceneObj.title;
 
           spawnHeartFirework(window.innerWidth / 2, window.innerHeight * 0.42);
         }
@@ -1836,7 +1782,6 @@
 
         // Update Luxury Caption Card for Current Scene
         const sceneObj = SCENES[activeSceneIndex];
-        const formattedTag = `CẢNH ${sceneObj.id} • ${sceneObj.title.toUpperCase()}`;
         const formattedTitle = (sceneObj.headline || sceneObj.title).replace(/\{NAME\}/g, loverName);
         const formattedSub = sceneObj.sub.replace(/\{NAME\}/g, loverName);
 
@@ -1848,9 +1793,7 @@
             captionCard.style.transform = 'translateY(4px)';
           }
           setTimeout(() => {
-            const tagEl = document.getElementById('caption-scene-tag');
             const titleEl = document.getElementById('caption-scene-title');
-            if (tagEl) tagEl.textContent = formattedTag;
             if (titleEl) titleEl.textContent = formattedTitle;
             if (syncedSubtitle) syncedSubtitle.textContent = `"${formattedSub}"`;
             if (captionCard) {
