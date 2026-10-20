@@ -348,6 +348,26 @@
       --sar: env(safe-area-inset-right, 0px);
     }
 
+    /* Mobile Web Performance & Touch Optimizations */
+    html, body {
+      touch-action: manipulation;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior: none;
+    }
+    button {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    :root {
+      --sat: env(safe-area-inset-top, 0px);
+      --sab: env(safe-area-inset-bottom, 0px);
+      --sal: env(safe-area-inset-left, 0px);
+      --sar: env(safe-area-inset-right, 0px);
+    }
+
     /* 12-Story Segments Progress Bar (Instagram / TikTok Stories Style) */
     .story-progress-container {
       display: flex;
@@ -560,7 +580,7 @@
   <main id="stage-container" class="relative z-10 w-full h-full flex flex-col justify-between pointer-events-none stage-perspective">
 
     <!-- TOP BAR (Cinematic Minimalist with Floating Romantic Audio Toggle) -->
-    <header class="w-full px-4 pt-3.5 sm:px-6 sm:pt-4 flex items-center justify-end pointer-events-auto z-30 select-none">
+    <header class="w-full px-4 flex items-center justify-end pointer-events-auto z-30 select-none" style="padding-top: max(14px, env(safe-area-inset-top, 14px));">
       <!-- Rotating Vinyl Disk Audio Indicator & Mute Button -->
       <button id="btn-audio-toggle" type="button" class="audio-disk-btn audio-disk-spinning" title="Bật / Tắt âm nhạc">
         <div id="disk-icon-waves" class="flex items-end justify-center gap-[2px] h-4">
@@ -984,7 +1004,7 @@
     <!-- =============================================================== -->
     <!-- LAYER 4: LUXURY TIME-SYNCED STORY CAPTION DOCK                  -->
     <!-- =============================================================== -->
-    <footer class="w-full px-3 pb-3 sm:px-6 sm:pb-5 flex flex-col items-center gap-1.5 pointer-events-auto z-30 select-none">
+    <footer class="w-full px-3 sm:px-6 flex flex-col items-center gap-1.5 pointer-events-auto z-30 select-none" style="padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));">
       <!-- Dedicated High-Contrast Story Caption Card (Impeccable Standard) -->
       <div id="story-caption-card" class="luxury-caption-card w-full max-w-md mx-auto px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl select-none">
 
@@ -1569,7 +1589,7 @@
       window.addEventListener('pointermove', (e) => {
         pointerX = (e.clientX / window.innerWidth - 0.5) * 2;
         pointerY = (e.clientY / window.innerHeight - 0.5) * 2;
-      });
+      }, { passive: true });
 
       /* -------------------------------------------------------------------
        * 5. 2D FX CANVAS: AUDIO SPECTRUM HALO, SHOOTING STARS & HEART FIREWORKS
@@ -1583,9 +1603,23 @@
         camera3D.aspect = w / h;
         camera3D.updateProjectionMatrix();
         renderer3D.setSize(w, h);
-        fxCanvas.width = w;
-        fxCanvas.height = h;
+
+        // High-DPI Sharpness for 2D Canvas Visualizer & Fireworks on Mobile
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        fxCanvas.width = Math.floor(w * dpr);
+        fxCanvas.height = Math.floor(h * dpr);
+        fxCanvas.style.width = w + 'px';
+        fxCanvas.style.height = h + 'px';
+        fxCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
+
+      // Handle WebGL Context Loss on Mobile (prevents black screen on app switch)
+      webglCanvas.addEventListener('webglcontextlost', (e) => {
+        e.preventDefault();
+      }, false);
+      webglCanvas.addEventListener('webglcontextrestored', () => {
+        resizeCanvases();
+      }, false);
       window.addEventListener('resize', resizeCanvases);
       resizeCanvases();
 
@@ -1824,6 +1858,12 @@
 
       function animateLoop(now) {
         requestAnimationFrame(animateLoop);
+
+        // Mobile Battery Saver: Pause GPU/CPU rendering when tab is hidden
+        if (document.hidden) {
+          lastFrameTime = now;
+          return;
+        }
 
         const dt = Math.min(0.1, (now - lastFrameTime) / 1000);
         lastFrameTime = now;
